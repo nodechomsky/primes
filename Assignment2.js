@@ -40,3 +40,5 @@ console.log(MyArray);
 
 MyArray.reverse();
 console.log(MyArray);
+
+//Git test
