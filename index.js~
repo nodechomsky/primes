@@ -54,6 +54,5 @@ function prmhoseAr ( n1, n2 )
     return(PrimAr);
 }
 
-prmhose ( 100, 1000 )
 
 
