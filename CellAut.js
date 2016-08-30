@@ -48,7 +48,7 @@ function DisplayGrid(){
  for (col = 0; col < gridY ; col++) {
  var displayAr = []
   for  (row = 0; row < gridX ; row++) {
-  if (grid[row] [col] == "1") { displayAr.unshift('\u2588') } else { displayAr.unshift(' ') }
+  if (grid[row] [col] == "1") { displayAr.push('\u2588') } else { displayAr.push(' ') }
   }
  console.log(displayAr.join(""))
  }
