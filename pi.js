@@ -1,6 +1,21 @@
   var delta = 0.000001
   var Qsize = 1
 
+  var approxAvg = 0
+  var attempts = 0
+  var giveup =  ( (1/delta) /10 )
+  var i = 0
+  var hit = 1	
+  var X = 0
+  var Y = 0
+  var d = 0
+  var approx = 1
+  var diff = 100
+  var radius = Qsize
+
+DisplayResults(PiApprox())
+
+
 function getRand(min, max) {
   return (  (Math.random() * (max - min) + min) ) 
  }
@@ -41,18 +56,6 @@ function DisplayResults(result){
  console.log("")
 }
 
-  var approxAvg = 0
-  var attempts = 0
-  var giveup =  ( (1/delta) /10 )
-  var i = 0
-  var hit = 1	
-  var X = 0
-  var Y = 0
-  var d = 0
-  var approx = 1
-  var diff = 100
-  var radius = Qsize
 
-DisplayResults(PiApprox())
 
 
