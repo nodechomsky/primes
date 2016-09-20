@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+   <canvas id="canvas" width="2000" height="1000"></canvas>
+  <script type="application/javascript">
+
+//Global Variables
+
+var color = "rgb(" + getRand(0,255) + "," + getRand(0,255) + ","+ getRand(0,255) + ")"
+var bgc = "rgb(" + getRand(0,255) + "," + getRand(0,255) + ","+ getRand(0,255) + ")"
+var gridX = 1366
+var gridY = 768
+var lowI = Math.floor( (gridX/10) )
+var highI = Math.floor( (gridX/5) )
+var grid = MkGrid( gridX , gridY )
+//sub functions
+function MkGrid(cdim , rdim){
+ var grid = new Array(cdim)
+ for (col = 0; col < cdim; col++) {
+  grid[col] = new Array(rdim) 
+  for (row = 0; row < rdim; row++) {
+   grid[col][row] = "0"
+  }
+ }
+ return grid
+}
+///////////////////////
+function ApplyRule(){
+ for (row = 0; row < (gridY - 1); row++) {
+  for  (col = 1; col < gridX - 1; col++) {
+   if (  ( grid[col - 1][row] == "0" ) && ( grid[col][row] == "0" ) && ( grid[col + 1][row] == "0" ) ) { grid[col] [row + 1] = ruleAr[7] }
+   if (  ( grid[col - 1][row] == "0" ) && ( grid[col][row] == "0" ) && ( grid[col + 1][row] == "1" ) ) { grid[col] [row + 1] = ruleAr[6] }
+   if (  ( grid[col - 1][row] == "0" ) && ( grid[col][row] == "1" ) && ( grid[col + 1][row] == "0" ) ) { grid[col] [row + 1] = ruleAr[5] }
+   if (  ( grid[col - 1][row] == "0" ) && ( grid[col][row] == "1" ) && ( grid[col + 1][row] == "1" ) ) { grid[col] [row + 1] = ruleAr[4] }
+   if (  ( grid[col - 1][row] == "1" ) && ( grid[col][row] == "0" ) && ( grid[col + 1][row] == "0" ) ) { grid[col] [row + 1] = ruleAr[3] }
+   if (  ( grid[col - 1][row] == "1" ) && ( grid[col][row] == "0" ) && ( grid[col + 1][row] == "1" ) ) { grid[col] [row + 1] = ruleAr[2] }
+   if (  ( grid[col - 1][row] == "1" ) && ( grid[col][row] == "1" ) && ( grid[col + 1][row] == "0" ) ) { grid[col] [row + 1] = ruleAr[1] }
+   if (  ( grid[col - 1][row] == "1" ) && ( grid[col][row] == "1" ) && ( grid[col + 1][row] == "1" ) ) { grid[col] [row + 1] = ruleAr[0] }
+  }
+ }
+}
+
+///////////////////////
+function seed(){
+ var it = 0
+ while(it < ( gridX - highI )){
+  it = it + getRand(lowI,lowI)
+  grid[it][0] = getRand(0,1) 
+ }
+}
+
+///////////////////////
+ function draw() {
+  var canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+  var ctx = canvas.getContext("2d");
+   for (col = 0; col < gridY ; col++) {
+   for  (row = 0; row < gridX ; row++) {
+    if ((grid[row] [col]) == "0"){
+     ctx.fillStyle = color;
+     ctx.fillRect (row, col, 1, 1);
+    }
+    else{
+     ctx.fillStyle = bgc;
+     ctx.fillRect (row, col, 1, 1);
+    }
+   }
+   }
+  ctx.fillStyle = "rgba(128,0,0,0.5)";
+  ctx.font = "150px monospace";
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center"
+  }
+ }
+///////////////////////
+function getRand(min, max, decP) {
+  return ( Number( (Math.random() * (max - min) + min).toFixed(decP) ) ) 
+ }
+
+//main////////////////
+
+//var rndrule = window.location.hash
+
+var rndrule = window.location.pathname
+
+console.log("pathname:" + rndrule)
+
+//var rndrule = "22" 
+
+//var rndrule = ""
+
+if (rndrule == "/") { rndrule = ( "/" + getRand(0,255) ) }
+
+var rule = rndrule.substring(1)
+
+console.log("sub:" + rule)
+
+gridX = Number(gridX)
+
+rule = Number(rule)
+
+console.log("rule:" + rule)
+
+var ruleStr = rule.toString(2);
+var ruleAr = ruleStr.split("");
+for(a=0 ;  ruleAr.length < 8 ; a++){
+ ruleAr.unshift("0")
+}
+
+seed()
+ApplyRule()
+
+document.write("<title>" + rndrule + "</title>")
+canvas.width = gridX
+canvas.height = gridY
+
+  </script>
+ </head>
+<body onload="draw();">
+
+
+ </body>
+</html>
+
+
