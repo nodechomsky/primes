@@ -21,7 +21,7 @@ function onRequest (request, response)
       response.write(fs.readFileSync('index.html', 'utf8'))
     }
     else {
-      if (ThePath != 'server.js') { response.write(fs.readFileSync(ThePath, 'utf8')) } else { response.write(fs.readFileSync('404.html', 'utf8')) }
+      if (ThePath !== 'server.js') { response.write(fs.readFileSync(ThePath, 'utf8')) } else { response.write(fs.readFileSync('404.html', 'utf8')) }
     }
   }
   else {
